@@ -70,7 +70,7 @@ NOPE рекомендуется устанавливать как отдельн
 Пример для Codex:
 
 ```bash
-git clone https://github.com/<user>/nope.git /path/to/project/.codex
+git clone https://github.com/XcreMANt/nope-ai.git /path/to/project/.codex
 ```
 
 ## Важно
