@@ -32,6 +32,7 @@ Run Governor if:
 - the assistant started "quick fixing" without stages;
 - contradictions appeared between NOPE root files;
 - system rules need to change;
+- NOPE self-modification is requested or performed, including changes to rules, playbooks, agent definitions, prompts, task lifecycle, approval/reviewer/governor semantics, or control documentation;
 - project adaptation quality needs review;
 - the task became wider than the original scope.
 

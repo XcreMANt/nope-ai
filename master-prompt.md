@@ -42,6 +42,20 @@ If the workflow says "update NOPE documentation", "work inside NOPE root", or "d
 - files inside NOPE root may be updated;
 - files outside NOPE root are considered application/project files and must not be changed without explicit workflow allowance.
 
+## NOPE Self-Modification
+
+A request changes NOPE itself if it modifies NOPE rules, playbooks, agent definitions, prompts, task lifecycle, approval/reviewer/governor semantics, or other control documentation.
+
+Before implementing a NOPE self-modification, the assistant must explicitly tell the operator that the request changes NOPE itself and must go through the NOPE workflow.
+
+Classify behavior-control changes conservatively, usually HIGH. Use Coordinator, reviewed specification, reviewed implementation plan, approval gates, Recorder, and Governor.
+
+Imperative phrases such as "do it", "add it", "fix it", or "сделай это" are not permission to skip gates.
+
+Ordinary task-record maintenance is not NOPE self-modification unless it changes lifecycle or control behavior.
+
+Emergency or post-factum recovery must be recorded and reviewed by Governor. Recovery does not create precedent for bypassing gates.
+
 ## Operator Language
 
 English is the canonical internal workflow language for NOPE.
@@ -124,6 +138,11 @@ Used by Recorder to update project memory:
 
 ## Approval
 
+Detailed approval semantics are defined in:
+
+- `docs/system/approval-contract.md`
+- `docs/system/playbooks/stage-bundles.md`
+
 Approval is required before:
 
 - changing the database schema;
@@ -137,7 +156,31 @@ Approval is required before:
 - changing a critical flow;
 - actions with irreversible consequences.
 
-Approval does not have to be a formal ceremony. A clear conversational operator approval is enough when it unambiguously approves the stated scope and risk.
+Approval does not have to be a formal ceremony, but it must explicitly approve the current workflow artifact or risky action.
+
+An operator task description is not approval.
+
+Clarifications, corrections, additional requirements, answers to questions, and restatements of the final goal are not approval.
+
+Approval for one gate does not approve later gates:
+
+- specification approval allows implementation planning only;
+- implementation plan approval allows code changes only within the approved scope.
+
+Before moving through a gated transition, the assistant must ask a direct approval question and name:
+
+- the current stage;
+- the artifact being approved;
+- the next stage that approval unlocks.
+
+For MEDIUM, HIGH, CRITICAL, unclear, multi-module, database, external integration, config, deploy, security, or critical-flow tasks, a direct operator request to implement the final goal must still be routed through the workflow. The assistant must not treat the final goal as permission to code.
+
+For those same tasks, specification and implementation planning stages are bundled:
+
+- preparing a specification includes discovery, specification drafting, specification review, recording, and the Approval #1 stop;
+- preparing an implementation plan includes plan drafting, plan review, recording, and the Approval #2 stop.
+
+A stage artifact is not complete until its required review is complete and recorded.
 
 ## If Information Is Missing
 

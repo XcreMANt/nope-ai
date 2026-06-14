@@ -8,7 +8,7 @@ Until project adaptation is complete, the project is considered unknown and pote
 
 The sign of completed adaptation:
 
-`docs/project-profile.md` contains the line:
+`docs/project/project-profile.md` contains the line:
 
     Adaptation status: complete
 
@@ -19,15 +19,16 @@ If this line is missing, code changes are not allowed.
 Before any task, the assistant must read:
 
 1. `master-prompt.md`
+2. `docs/system/coding-behavior.md`
 
 If the project has already been adapted, also read:
 
-2. `docs/onboarding.md`
-3. `docs/project-profile.md`
-4. `docs/risk-map.md`
-5. `docs/critical-flows.md`
+3. `docs/system/onboarding.md`
+4. `docs/project/project-profile.md`
+5. `docs/project/risk-map.md`
+6. `docs/project/critical-flows.md`
 
-If the project has not been adapted, go to `docs/playbooks/adaptation.md`.
+If the project has not been adapted, go to `docs/system/playbooks/adaptation.md`.
 
 ## Agents
 

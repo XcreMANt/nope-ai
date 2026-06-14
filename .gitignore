@@ -1,4 +1,4 @@
-.idea/
+__MACOSX
+.idea
 .DS_Store
-__MACOSX/
 *.zip

@@ -111,11 +111,11 @@ Result:
 
 Fill:
 
-- `docs/project-profile.md`
-- `docs/tooling.md`
-- `docs/testing.md`
-- `docs/conventions.md`
-- `docs/known-unknowns.md`
+- `docs/project/project-profile.md`
+- `docs/project/tooling.md`
+- `docs/project/testing.md`
+- `docs/project/conventions.md`
+- `docs/project/known-unknowns.md`
 
 Requirements:
 
@@ -130,10 +130,10 @@ Requirements:
 
 Fill:
 
-- `docs/architecture.md`
-- `docs/critical-flows.md`
-- `docs/legacy-risks.md`
-- `docs/patterns.md`
+- `docs/project/architecture.md`
+- `docs/project/critical-flows.md`
+- `docs/project/legacy-risks.md`
+- `docs/project/patterns.md`
 
 Identify:
 
@@ -154,7 +154,7 @@ Identify:
 
 Fill:
 
-- `docs/risk-map.md`
+- `docs/project/risk-map.md`
 
 Classify project areas:
 
@@ -206,7 +206,7 @@ Adaptation may be marked complete only if:
 - unknowns are separated out;
 - verification limitations are separated out.
 
-After that, `docs/project-profile.md` may be set to:
+After that, `docs/project/project-profile.md` may be set to:
 
     Adaptation status: complete
 

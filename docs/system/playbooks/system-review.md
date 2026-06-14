@@ -12,10 +12,10 @@ Understand whether the system has become contradictory, too soft, or incomplete.
 - `AGENTS.md`
 - `prompts.md`
 - `.agents/*`
-- `docs/playbooks/*`
-- `docs/project-profile.md`
-- `docs/risk-map.md`
-- `docs/known-unknowns.md`
+- `docs/system/playbooks/*`
+- `docs/project/project-profile.md`
+- `docs/project/risk-map.md`
+- `docs/project/known-unknowns.md`
 
 ## Main Questions
 

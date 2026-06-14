@@ -30,7 +30,17 @@ Run discovery for the task.
 
 Continue through Spec Writer.
 
-Prepare the task for implementation.
+Prepare the task for implementation: discovery if needed, specification, specification review, reviewed specification recording, then stop at Approval #1.
+
+Do not change code.
+
+---
+
+## Implementation Plan
+
+Continue through Developer.
+
+Prepare the implementation plan: plan draft, plan review, reviewed plan recording, short handoff prompt for implementation in another thread, then stop at Approval #2.
 
 Do not change code.
 

@@ -8,7 +8,7 @@ Global rules are in:
 
 - `master-prompt.md`
 - `AGENTS.md`
-- `docs/risk-philosophy.md`
+- `docs/system/risk-philosophy.md`
 
 ## Project Status
 
@@ -24,26 +24,26 @@ Unknown
 
 ## Critical flows
 
-See `docs/critical-flows.md`.
+See `docs/project/critical-flows.md`.
 
 ## Risk zones
 
-See `docs/risk-map.md`.
+See `docs/project/risk-map.md`.
 
 ## Main Commands
 
-See `docs/tooling.md` and `docs/testing.md`.
+See `docs/project/tooling.md` and `docs/project/testing.md`.
 
 ## Workflow
 
-See `docs/playbooks/base-workflow.md`.
+See `docs/system/playbooks/base-workflow.md`.
 
 ## Known unknowns
 
-See `docs/known-unknowns.md`.
+See `docs/project/known-unknowns.md`.
 
 ## Quick Start For a Task
 
-1. Review adaptation status in `docs/project-profile.md`.
+1. Review adaptation status in `docs/project/project-profile.md`.
 2. If adaptation is incomplete, run the adaptation workflow.
 3. If adaptation is complete, start the task through Coordinator.

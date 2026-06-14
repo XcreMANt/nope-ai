@@ -2,6 +2,12 @@
 
 This is the main workflow for any task.
 
+Specification and implementation planning stage bundles are defined in:
+
+- `stage-bundles.md`
+
+For MEDIUM, HIGH, CRITICAL, unclear, multi-module, database, external integration, config, deploy, security, or critical-flow tasks, stage bundles are mandatory.
+
 ## 1. Determine Mode
 
 Coordinator determines the mode:
@@ -16,9 +22,18 @@ Coordinator determines the mode:
 
 If project adaptation is incomplete, move to adaptation.
 
+Coordinator must begin task processing with a handshake:
+
+- detected mode;
+- preliminary risk level;
+- required roles;
+- whether subagents are needed;
+- next artifact to produce;
+- stop point before the next gated transition.
+
 ## 2. Review Adaptation Status
 
-Review `docs/project-profile.md`.
+Review `docs/project/project-profile.md`.
 
 If it does not contain the line:
 
@@ -90,6 +105,8 @@ The specification must include:
 - verification plan;
 - open questions.
 
+For tasks covered by stage bundles, this step is not complete until Specification Review is complete and the reviewed specification is recorded.
+
 ## 6. Specification Review
 
 Reviewer reviews:
@@ -117,6 +134,32 @@ Approval is needed before implementation planning if the task:
 
 Do not continue without approval.
 
+Clarifications, corrections, additional requirements, and answers to questions are not approval.
+
+The assistant must ask a direct approval question in the operator's language that names the reviewed specification and states that approval unlocks implementation planning only.
+
+Required semantic fields:
+
+- stage;
+- blocking condition;
+- direct approval question.
+
+English example:
+
+```text
+Stage: Specification Review complete.
+Blocked until: operator approval of the specification.
+Question: Do you approve this specification so I can prepare the implementation plan?
+```
+
+Russian example:
+
+```text
+Стадия: review ТЗ завершён.
+Блокировка: нужен approval оператора на ТЗ.
+Вопрос: ты approve это ТЗ, чтобы я мог подготовить план реализации?
+```
+
 ## 8. Implementation Plan
 
 Developer prepares a plan, but does not change code.
@@ -130,6 +173,10 @@ The plan must include:
 - rollback;
 - verification steps;
 - what cannot be verified locally.
+
+For tasks covered by stage bundles, this step is not complete until Plan Review is complete and the reviewed plan is recorded.
+
+For tasks that may be implemented in another thread, the completed planning stage must also provide a short implementation handoff prompt that references the reviewed task artifact.
 
 ## 9. Plan Review
 
@@ -149,6 +196,32 @@ If the plan is dangerous, return it for revision.
 ## 10. Approval #2
 
 After approval, code may be changed strictly according to the plan.
+
+Specification approval does not approve implementation.
+
+The assistant must ask a direct approval question in the operator's language that names the reviewed implementation plan and states that approval unlocks code changes only within that plan.
+
+Required semantic fields:
+
+- stage;
+- blocking condition;
+- direct approval question.
+
+English example:
+
+```text
+Stage: Plan Review complete.
+Blocked until: operator approval of the implementation plan.
+Question: Do you approve this implementation plan so I can change code strictly within this scope?
+```
+
+Russian example:
+
+```text
+Стадия: review плана реализации завершён.
+Блокировка: нужен approval оператора на план реализации.
+Вопрос: ты approve этот план реализации, чтобы я мог менять код строго в его рамках?
+```
 
 ## 11. Implementation
 
@@ -180,6 +253,7 @@ Reviewer reviews:
 
 - conformance to the specification;
 - conformance to the plan;
+- Coding Behavior Filter from `docs/system/coding-behavior.md`, if code changed;
 - absence of extra changes;
 - side effects;
 - backward compatibility;
@@ -187,6 +261,8 @@ Reviewer reviews:
 - security implications;
 - tests;
 - rollback risk.
+
+For tasks with code changes, failing the Coding Behavior Filter blocks completion until the implementation is revised or an explicit approved exception is recorded.
 
 Verdict:
 
@@ -204,3 +280,11 @@ Recorder records the result:
 - risk-map update, if needed;
 - known-unknowns update, if needed;
 - architecture/patterns update, if new facts appeared.
+
+Recorder also updates task directory state:
+
+- completed task records move from `docs/project/tasks/todo/` to `docs/project/tasks/done/`;
+- postponed task records move from `docs/project/tasks/todo/` to `docs/project/tasks/deferred/`;
+- active task records remain in `docs/project/tasks/todo/`.
+
+Do not leave completed task records in `todo` with only an internal `DONE` or `IMPLEMENTED` status.

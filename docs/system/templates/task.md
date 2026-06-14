@@ -4,6 +4,15 @@
 
 TODO / IN_PROGRESS / BLOCKED / DONE / DEFERRED
 
+## Summary
+
+- Status:
+- Risk:
+- Affected files/flows:
+- Key decisions:
+- Verification:
+- Remaining risks / follow-up:
+
 ## Context
 
 ## Goal

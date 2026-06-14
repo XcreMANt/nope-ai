@@ -1,71 +1,77 @@
 # NOPE
 
-**NOPE - No Opportunistic Production Edits**
+**NOPE — No Opportunistic Production Edits**
 
-NOPE is a risk-driven orchestration system for AI-assisted development in existing production projects where mistakes are expensive.
+NOPE is a risk-driven orchestration system for AI-assisted software development in existing production projects.
 
-The system is not optimized for maximum autonomy or the fastest possible code generation. It is optimized for controlled changes and reduced risk of side effects.
+Instead of optimizing for maximum autonomy or code generation speed, NOPE focuses on change control, risk reduction, and keeping a human operator in the decision-making loop.
 
-NOPE is especially useful for:
+NOPE is particularly useful for:
 
-- legacy monoliths;
-- changes in critical code;
+- legacy systems;
+- critical production code;
 - projects with a high cost of failure;
-- long-lived systems with complex architecture.
+- long-lived systems with complex architectures.
 
-NOPE does not try to fully replace an engineer or make decisions on their behalf.
+NOPE is built on a simple assumption: modern AI models can significantly accelerate software development, but they can also make incorrect assumptions, expand the scope of changes, and underestimate architectural or business consequences.
 
-The system assumes that AI is probabilistic by nature and can be wrong, especially in large projects with complex logic and implicit dependencies.
+The primary goal of NOPE is to reduce the likelihood of such failures while keeping the operator responsible for final decisions.
 
-AI models tend to expand changes beyond the original task scope, make unverified assumptions, and modify related parts of a system without fully understanding the architectural and business consequences.
-
-The purpose of NOPE is to reduce the risk of such changes and prevent AI from making critical architecture or production decisions on its own, without operator control.
-
----
-
-# Main Idea
-
-Many AI development tools are mainly oriented around task speed and autonomous changes.
-
-NOPE does not try to write code as early as possible. It tries to understand first:
-
-- how the project is structured;
-- which parts of the system are affected;
-- what risks and unknowns exist;
-- what cannot be verified locally;
-- where side effects may appear.
+> NOPE is experimental.
+>
+> It is intended to reduce risk in AI-assisted development, not to guarantee safety.
+>
+> Final responsibility always remains with the human operator.
 
 ---
 
-# Core Principles
+## How NOPE Differs from Typical AI-Assisted Development
 
-- risk-aware changes;
-- the smallest necessary change set;
-- no opportunistic refactoring;
-- no unverified assumptions;
-- operator control over changes;
-- strict review of risky changes;
-- explicit recording of unknowns and doubtful areas;
-- rollback awareness;
-- protection of critical user flows.
+Most AI coding workflows are optimized to reach code changes as quickly as possible.
 
----
+That approach works well for isolated tasks but becomes increasingly risky as project complexity and the cost of mistakes grow.
 
-## System Limits
+NOPE introduces additional analysis and review stages before implementation begins. The system attempts to understand the project, identify risks, define the affected areas of the system, and establish clear boundaries for the requested change before any code is modified.
 
-NOPE does not guarantee that changes are safe and does not eliminate AI model errors.
+The goal is not to slow development down, but to reduce the likelihood of:
 
-The system is meant to reduce the risk of AI-assisted development, not to enable fully autonomous changes to production systems.
-
-NOPE is not designed for unattended production changes.
-
-The operator remains responsible for approving risky actions and for the final state of the system.
+- misunderstanding requirements;
+- unintended scope expansion;
+- unsupported assumptions;
+- dangerous side effects;
+- modifications to critical parts of the system without sufficient analysis.
 
 ---
 
-# Installation
+## Core Idea
 
-NOPE is best installed as a separate nested git repository. This makes the system easier to update and keeps NOPE separate from project code.
+NOPE does not try to write code as early as possible.
+
+A typical workflow looks like this:
+
+```text
+Task
+→ Specification
+→ Review
+→ Approval
+→ Implementation Plan
+→ Review
+→ Approval
+→ Implementation
+→ Review
+→ Verification
+→ Recording
+```
+
+Both the specification and the implementation plan are reviewed before development begins.
+
+In practice, many AI-related failures occur long before code is written — during requirement interpretation, architectural reasoning, and impact analysis. NOPE therefore places most of its effort on understanding and validation before implementation.
+
+---
+
+## Installation
+
+NOPE is intended to be installed as a nested Git repository inside the target project.
 
 Example for Codex:
 
@@ -73,69 +79,92 @@ Example for Codex:
 git clone https://github.com/XcreMANt/nope-ai.git /path/to/project/.codex
 ```
 
-## Important
+---
 
-NOPE is not an immutable framework.
+## Quick Start
 
-After the adaptation workflow, the system is adapted to a specific project and starts storing project-specific operational knowledge. After that, the contents of `docs/` become project memory for the system.
+### Step 1. Adapt the Project
 
-Before updating NOPE, review possible conflicts between the new NOPE version and the project-specific documentation.
+Before development begins, run the adaptation workflow.
 
-## After Installation
+Example:
 
-Open the project in the AI assistant and run the adaptation workflow.
+```text
+Start adaptation workflow via Coordinator.
+
+The project is new.
+Do not modify application code before adaptation is complete.
+```
+
+NOPE does not assume prior knowledge of the project.
+
+During adaptation, the system studies the project structure, identifies critical flows, maps risk areas, determines verification constraints, and builds an operational model of the system.
+
+Production code should not be modified until adaptation is complete.
 
 ---
 
-# Adaptation Workflow
+### Step 2. Start a Task
 
-Before development, run the adaptation workflow.
+Once adaptation is finished, assign a task to the Coordinator.
 
-It:
+Example:
 
-- studies the project;
-- identifies critical user flows;
-- identifies risk zones;
-- identifies dangerous operations;
-- identifies verification limits;
-- builds a working model of the project.
+```text
+Start task via Coordinator.
 
-Changing production code before the adaptation workflow is complete is not recommended.
+Task:
+<task description>
+```
 
----
+You may also describe the task in natural language.
 
-# Operator Language
-
-English is the canonical internal workflow language for NOPE.
-
-The operator may communicate in Russian or another language. If the operator writes in Russian, answer the operator in Russian unless they explicitly ask otherwise.
-
-The operator language must not change the internal NOPE workflow. Terms such as `approval`, `review`, `verification`, `critical flow`, `scope drift`, and `NOPE root` keep their NOPE meaning across languages.
+The Coordinator determines the next workflow stage and ensures that required reviews and approvals are completed before implementation begins.
 
 ---
 
-# Project Status
+## Project Memory
 
-The project is in a phase of variable activity.
+As work progresses, NOPE accumulates project-specific knowledge.
 
-The architecture, workflow, and playbooks are still being calibrated on real production scenarios.
+This includes architectural information, decisions, constraints, identified risks, and completed tasks.
+
+Finished tasks are archived, while condensed summaries are stored in indexes. This helps reduce active context size, lower token usage, and make previous decisions easier to discover without repeatedly loading the full project history.
+
+NOPE documentation is split by responsibility:
+
+- `docs/system/` contains reusable NOPE workflow, approval, playbook, template, and control documentation.
+- `docs/project/` contains per-project memory created during adaptation and task execution, including project profile, risks, critical flows, decisions, and task records.
 
 ---
 
-# Search Keywords
+## Limitations
 
-AI-assisted development  
-risk-driven development  
-safe AI coding  
-production-safe AI workflow  
-AI orchestration  
-LLM software engineering  
-multi-agent workflow  
-critical production systems  
-AI governance  
-AI coding safety  
-legacy-safe AI development
+NOPE does not replace engineers and does not guarantee safe changes.
+
+It is designed to reduce risk in AI-assisted development, not to enable fully autonomous modification of production systems.
+
+The operator remains responsible for:
+
+- decisions and approvals;
+- validation of proposed changes;
+- verification of results;
+- the final state of the production system.
+
+NOPE is not intended for unattended production changes.
+
+---
+
+## Current Status
+
+NOPE is under active development.
+
+The architecture, workflows, and playbooks continue to be tested and refined through real-world production use cases.
+
+Feedback, criticism, and practical experience reports are welcome.
+
+---
 
 ## License
 
-MIT
+MIT License.
